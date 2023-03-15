@@ -97,6 +97,10 @@ class RBTree:
         if node == None:
             return 0
         return 1 + max(self.__get_height(node.left), self.__get_height(node.right))
+    
+    def insert_list(self, L:list):
+        for i in L:
+            self.insert(i)
 
     def insert(self, value):
         if self.is_empty():
@@ -146,7 +150,9 @@ class RBTree:
                 node.get_uncle().make_black()
                 node.get_gramps().make_red()
                 self.fix(node.get_gramps())
-            if node.get_gramps() == None:
+            if node.parent == None:
+                self.root = node
+            elif node.get_gramps() == None:
                 self.root = node.parent
         self.root.make_black()
         
