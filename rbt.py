@@ -29,7 +29,7 @@ class RBNode:
         self.colour = "R"
 
     def get_brother(self):
-        if self.parent.right == self:
+        if self.is_right_child():
             return self.parent.left
         return self.parent.right
 
@@ -52,28 +52,36 @@ class RBNode:
 
     #rotates a parent to become a right child
     def rotate_right(self):
+        #set parent's pointer to child
         if self.parent == None:
             pass
         elif self.is_left_child():
             self.parent.left = self.left
         elif self.is_right_child():
             self.parent.right = self.left
+            
         temp = self.left.right
         self.left.parent = self.parent
+        if isinstance(self.left.right, RBNode):
+            self.left.right.parent = self
         self.left.right = self
         self.parent = self.left
         self.left = temp
 
     #rotates a parent to become a left child
     def rotate_left(self):
+        #set parent's pointer to child
         if self.parent == None:
             pass
         elif self.is_left_child():
             self.parent.left = self.right
         elif self.is_right_child():
             self.parent.right = self.right
+            
         temp = self.right.left
         self.right.parent = self.parent
+        if isinstance(self.right.left, RBNode):
+            self.right.left.parent = self
         self.right.left = self
         self.parent = self.right
         self.right = temp
@@ -108,6 +116,7 @@ class RBTree:
             self.root.make_black()
         else:
             self.__insert(self.root, value)
+            
 
     def __insert(self, node, value):
         if value < node.value:
@@ -126,10 +135,10 @@ class RBTree:
                 self.__insert(node.right, value)
 
     def fix(self, node:RBNode):
-        #You may alter code in this method if you wish, it's merely a guide.
+        #pretty sure there's a setup that gets two nodes to point to each other and go infinite referencing left and right, but idk how it happen
         if node.parent == None:
             node.make_black()
-        while node != None and node.parent != None and node.parent.is_red():  
+        while node != None and node.parent != None and node.parent.is_red() and node.is_red():  
             if node.get_uncle() == None or node.uncle_is_black(): #no uncle or black uncle (same process)
                 #LL
                 if node.is_left_child() and node.parent.is_left_child():
@@ -165,7 +174,8 @@ class RBTree:
         node.get_gramps().make_red()
         node.get_gramps().rotate_left()
         node.parent.make_black()
-                    
+        
+                         
         
     def __str__(self):
         if self.is_empty():
