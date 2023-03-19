@@ -40,7 +40,7 @@ for i in range(randomness):
 
 diff = []
 for i in range(randomness):
-    diff.append((RB_height[i] - BST_height[i]) / experiments)
+    diff.append((BST_height[i] - RB_height[i]) / experiments)
 
 plt.plot(swaps, diff)
 plt.xlabel("Number of random swaps")
