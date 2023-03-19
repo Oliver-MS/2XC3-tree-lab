@@ -15,7 +15,7 @@ def random_list(size, swaps):
         L[i], L[j] = L[j], L[i]
     return L
 
-list_size = 50
+list_size = 100
 experiments = 50
 randomness = 100
 RB_height = []
@@ -38,7 +38,6 @@ for i in range(randomness):
     RB_height.append(total_RB_height)
     BST_height.append(total_BST_height)
 
-# we want to plot the average difference between the two
 diff = []
 for i in range(randomness):
     diff.append((RB_height[i] - BST_height[i]) / experiments)
