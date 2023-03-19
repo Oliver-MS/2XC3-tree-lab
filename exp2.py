@@ -35,12 +35,12 @@ for i in range(randomness):
         bst.insert_list(curr)
         total_BST_height += bst.get_height()
     swaps.append(i)
-    RB_height.append(total_RB_height)
-    BST_height.append(total_BST_height)
+    RB_height.append(total_RB_height / experiments)
+    BST_height.append(total_BST_height / experiments)
 
 diff = []
 for i in range(randomness):
-    diff.append((RB_height[i] - BST_height[i]) / experiments)
+    diff.append((BST_height[i] - RB_height[i]))
 
 plt.plot(swaps, diff)
 plt.xlabel("Number of random swaps")
