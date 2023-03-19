@@ -21,3 +21,11 @@ class XC3Tree:
         if node.degree == 0:
             return 1
         return 1 + self._get_height(node.rightmost_child())
+    def get_degree(self):
+        return self.root.degree
+    def number_of_nodes(self):
+        return self._number_of_nodes(self.root)
+    def _number_of_nodes(self, node):
+        if node.degree == 0:
+            return 1
+        return 1 + sum(self._number_of_nodes(child) for child in node.children)
