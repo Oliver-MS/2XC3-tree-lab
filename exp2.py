@@ -16,8 +16,8 @@ def random_list(size, swaps):
     return L
 
 list_size = 100
-experiments = 50
-randomness = 100
+experiments = 500
+randomness = 200
 RB_height = []
 BST_height = []
 swaps = []
