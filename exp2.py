@@ -48,5 +48,3 @@ plt.xlabel("Number of random swaps")
 plt.ylabel("Average difference in height")
 plt.title("Average difference in height between RBT and BST")
 plt.show()
-
-
