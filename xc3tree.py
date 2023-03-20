@@ -14,7 +14,7 @@ class XC3Tree:
         return self.root == None
     def get_height(self):
         if self.root.degree == 0:
-            return 0
+            return 1
         return self._get_height(self.root)
     
     def _get_height(self, node):
